@@ -1,0 +1,47 @@
+{
+  "name": "react-simple-checkbox",
+  "description": "Simple React checkbox component",
+  "main": "index.js",
+  "version": "0.2.2",
+  "keywords": [
+    "react",
+    "checkbox"
+  ],
+  "author": "Opsolem",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Opsolem/react-simple-checkbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Opsolem/react-simple-checkbox/issues"
+  },
+  "scripts": {
+    "start": "webpack -p"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.10",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  }
+}

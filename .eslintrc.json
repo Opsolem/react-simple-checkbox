@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "linebreak-style": [1,  "windows" ],
+    "jsx-a11y/no-autofocus": [ 0, { "ignoreNonDOM": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": [1, { "forbid": ["any"] }]
+  },
+  "parser": "babel-eslint"
+}

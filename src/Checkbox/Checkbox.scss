@@ -1,0 +1,42 @@
+.Checkbox {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  top: 11px;
+
+  svg {
+    position: relative;
+    top: -4px;
+  }
+
+  .tick {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    transition: stroke-dashoffset .5s cubic-bezier(1,0,.55,.41);
+  }
+
+  .square {
+    fill-opacity: 0;
+    transition: fill-opacity .18s ease-in-out;
+  }
+
+  &.checked {
+    .tick {
+      stroke-dashoffset: 0;
+      transition-delay: .12s;
+    }
+    .square {
+      fill-opacity: 1;
+    }
+  }
+
+  &.unchecked {
+    .tick {
+      stroke-dashoffset: 24;
+    }
+    .square {
+      fill-opacity: 0;
+      transition-delay: .6s;
+    }
+  }
+}
