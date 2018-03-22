@@ -1,7 +1,7 @@
 {
   "name": "react-simple-checkbox",
   "description": "Simple React checkbox component",
-  "main": "index.js",
+  "main": "dist/bundle.js",
   "version": "1.0.7",
   "keywords": [
     "react",

@@ -8,7 +8,7 @@ const config = {
   output: {
     path: `${DIST_DIR}`,
     filename: 'bundle.js',
-    publicPath: '/',
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
