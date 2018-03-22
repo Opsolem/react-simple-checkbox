@@ -10,6 +10,7 @@ class Checkbox extends Component {
     checked: PropTypes.bool,
     color: PropTypes.string,
     size: PropTypes.oneOf(1, 2, 3),
+    borderThickness: PropTypes.oneOf(1, 2, 3, 4),
     className: PropTypes.string,
     OnCheck: PropTypes.func,
   }
@@ -19,6 +20,7 @@ class Checkbox extends Component {
     checked: false,
     color: '#4A4A4A',
     size: 1,
+    borderThickness: 3,
     className: '',
     OnCheck: () => {},
   }
@@ -91,7 +93,9 @@ class Checkbox extends Component {
             rx="2"
             ry="2"
             style={{
-              fill: this.props.color, stroke: this.props.color, strokeWidth: '4px',
+              fill: this.props.color,
+              stroke: this.props.color,
+              strokeWidth: `${this.props.borderThickness}px`,
             }}
           />
           <path

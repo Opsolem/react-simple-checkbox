@@ -2,12 +2,9 @@
   display: inline-block;
   cursor: pointer;
   position: relative;
-  top: 11px;
-
-  svg {
-    position: relative;
-    top: -4px;
-  }
+  top: 6px;
+  width: 24px;
+  height: 24px;
 
   .tick {
     stroke-dasharray: 24;
