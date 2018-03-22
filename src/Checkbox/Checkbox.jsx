@@ -9,8 +9,8 @@ class Checkbox extends Component {
     id: PropTypes.string,
     checked: PropTypes.bool,
     color: PropTypes.string,
-    size: PropTypes.oneOf(1, 2, 3),
-    borderThickness: PropTypes.oneOf(1, 2, 3, 4),
+    size: PropTypes.oneOf([1, 2, 3]),
+    borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
     className: PropTypes.string,
     OnCheck: PropTypes.func,
   }
