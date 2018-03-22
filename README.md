@@ -51,6 +51,12 @@ import Checkbox from 'react-simple-checkbox';
           <td>possible values are 1, 2 or 3</td>
         </tr>
         <tr>
+          <td>borderThickness</td>
+          <td>number</td>
+          <td>3</td>
+          <td>border thickness in pixels, possible values are 1, 2, 3, 4</td>
+        </tr>
+        <tr>
           <td>className</td>
           <td>String</td>
           <td></td>
