@@ -2,7 +2,7 @@
   "name": "react-simple-checkbox",
   "description": "Simple React checkbox component",
   "main": "index.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": [
     "react",
     "checkbox"
