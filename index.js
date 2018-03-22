@@ -1,1 +1,1 @@
-export { default } from './dist/bundle';
+export { default } from './src/';
