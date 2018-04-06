@@ -69,7 +69,7 @@ import Checkbox from 'react-simple-checkbox';
           <td></td>
         </tr>
         <tr>
-          <td>OnCheck</td>
+          <td>onChange</td>
           <td>Function(isChecked:boolean)</td>
           <td></td>
           <td>called when checkbox is changed. isChecked is the new checkbox value.</td>

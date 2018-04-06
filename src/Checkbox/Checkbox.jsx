@@ -12,7 +12,7 @@ class Checkbox extends Component {
     size: PropTypes.oneOf([1, 2, 3]),
     borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
     className: PropTypes.string,
-    OnCheck: PropTypes.func,
+    onChange: PropTypes.func,
   }
 
   static defaultProps = {
@@ -22,7 +22,7 @@ class Checkbox extends Component {
     size: 1,
     borderThickness: 3,
     className: '',
-    OnCheck: () => {},
+    onChange: () => {},
   }
 
   constructor(props) {
@@ -52,7 +52,7 @@ class Checkbox extends Component {
       checked: newValue,
     });
 
-    this.props.OnCheck(newValue);
+    this.props.onChange(newValue);
   }
 
 
