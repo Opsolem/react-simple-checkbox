@@ -40,14 +40,20 @@ import Checkbox from 'react-simple-checkbox';
         </tr>
         <tr>
           <td>color</td>
-          <td>String</td>
+          <td>String or Object</td>
           <td>#4A4A4A</td>
-          <td>checkbox's color</td>
+          <td>checkbox's color. Can be a string or an object with following properties : backgroundColor, borderColor, uncheckedBorderColor and tickColor. (HEX format only)</td>
         </tr>
         <tr>
           <td>size</td>
           <td>number</td>
           <td>1</td>
+          <td>possible values are 1, 2 or 3</td>
+        </tr>
+        <tr>
+          <td>tickSize</td>
+          <td>number</td>
+          <td>2</td>
           <td>possible values are 1, 2 or 3</td>
         </tr>
         <tr>

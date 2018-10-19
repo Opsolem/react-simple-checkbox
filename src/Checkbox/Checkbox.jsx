@@ -3,13 +3,19 @@ import PropTypes from 'prop-types';
 
 require('./Checkbox.scss');
 
+function isStringAndColorValue(str) {
+  return (typeof str === 'string' || str instanceof String) && str.match(/^#(([a-fA-F]|\w){3}|([a-fA-F]|\w){6})$/gi);
+}
 
 class Checkbox extends Component {
+  static _defaultColor = '#4A4A4A';
+
   static propTypes = {
     id: PropTypes.string,
     checked: PropTypes.bool,
-    color: PropTypes.string,
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     size: PropTypes.oneOf([1, 2, 3]),
+    tickSize: PropTypes.oneOf([1, 2, 3]),
     borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
     className: PropTypes.string,
     onChange: PropTypes.func,
@@ -20,16 +26,44 @@ class Checkbox extends Component {
     checked: false,
     color: '#4A4A4A',
     size: 1,
+    tickSize: 2,
     borderThickness: 3,
     className: '',
-    onChange: () => {},
+    onChange: () => { },
   }
 
   constructor(props) {
     super(props);
 
+    const backgroundColor = isStringAndColorValue(props.color)
+      ? props.color
+      : isStringAndColorValue(props.color.backgroundColor)
+        ? props.color.backgroundColor
+        : Checkbox._defaultColor;
+    const borderColor = isStringAndColorValue(props.color)
+      ? props.color
+      : isStringAndColorValue(props.color.borderColor)
+        ? props.color.borderColor
+        : Checkbox._defaultColor;
+    const uncheckedBorderColor = isStringAndColorValue(props.color)
+      ? props.color
+      : isStringAndColorValue(props.color.uncheckedBorderColor)
+        ? props.color.uncheckedBorderColor
+        : Checkbox._defaultColor;
+    const tickColor = isStringAndColorValue(props.color)
+      ? props.color
+      : isStringAndColorValue(props.color.tickColor)
+        ? props.color.tickColor
+        : '#FFFFFF';
+
     this.state = {
       checked: props.checked,
+      colors: {
+        backgroundColor,
+        borderColor,
+        uncheckedBorderColor,
+        tickColor,
+      },
     };
 
     this.handleClickCheckbox = this.handleClickCheckbox.bind(this);
@@ -92,17 +126,15 @@ class Checkbox extends Component {
             height="20"
             rx="2"
             ry="2"
-            style={{
-              fill: this.props.color,
-              stroke: this.props.color,
-              strokeWidth: `${this.props.borderThickness}px`,
-            }}
+            fill={this.state.colors.backgroundColor}
+            stroke={this.state.checked ? this.state.colors.borderColor : this.state.colors.uncheckedBorderColor}
+            strokeWidth={`${this.props.borderThickness}px`}
           />
           <path
             className="tick"
             d="M6,6 v8 h16"
-            stroke="#EFEFEF"
-            strokeWidth="4"
+            strokeWidth={this.props.tickSize}
+            stroke={this.state.colors.tickColor}
             fill="none"
             transform="rotate(-45, 12, 12)"
           />
