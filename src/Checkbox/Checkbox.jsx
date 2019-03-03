@@ -24,7 +24,7 @@ class Checkbox extends Component {
   static defaultProps = {
     id: '',
     checked: false,
-    color: '#4A4A4A',
+    color: {},
     size: 1,
     tickSize: 2,
     borderThickness: 3,
@@ -50,11 +50,9 @@ class Checkbox extends Component {
       : isStringAndColorValue(props.color.uncheckedBorderColor)
         ? props.color.uncheckedBorderColor
         : Checkbox._defaultColor;
-    const tickColor = isStringAndColorValue(props.color)
-      ? props.color
-      : isStringAndColorValue(props.color.tickColor)
-        ? props.color.tickColor
-        : '#FFFFFF';
+    const tickColor = isStringAndColorValue(props.color.tickColor)
+      ? props.color.tickColor
+      : '#FFFFFF';
 
     this.state = {
       checked: props.checked,
@@ -71,21 +69,14 @@ class Checkbox extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.checked !== nextProps.checked) {
-      this.setState({
-        ...this.state,
-        checked: nextProps.checked,
-      });
+      this.setState({ checked: nextProps.checked });
     }
   }
 
   handleClickCheckbox() {
     const newValue = !this.state.checked;
 
-    this.setState({
-      ...this.state,
-      checked: newValue,
-    });
-
+    this.setState({ checked: newValue });
     this.props.onChange(newValue);
   }
 
