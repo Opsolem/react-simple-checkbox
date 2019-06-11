@@ -3,13 +3,40 @@ import PropTypes from 'prop-types';
 
 require('./Checkbox.scss');
 
+const defaultColor = '#4A4A4A';
+
 function isStringAndColorValue(str) {
   return (typeof str === 'string' || str instanceof String) && str.match(/^#(([a-fA-F]|\w){3}|([a-fA-F]|\w){6})$/gi);
 }
 
-class Checkbox extends Component {
-  static _defaultColor = '#4A4A4A';
+function getColors(propsColor) {
+  const colors = {};
+  const isPropsColor = isStringAndColorValue(propsColor);
 
+  colors.backgroundColor = isPropsColor ? propsColor : defaultColor;
+  if (!isPropsColor && isStringAndColorValue(propsColor.backgroundColor)) {
+    colors.backgroundColor = propsColor.backgroundColor;
+  }
+
+  colors.borderColor = isPropsColor ? propsColor : defaultColor;
+  if (!isPropsColor && isStringAndColorValue(propsColor.borderColor)) {
+    colors.borderColor = propsColor.borderColor;
+  }
+
+  colors.uncheckedBorderColor = isPropsColor ? propsColor : defaultColor;
+  if (!isPropsColor && isStringAndColorValue(propsColor.uncheckedBorderColor)) {
+    colors.uncheckedBorderColor = propsColor.uncheckedBorderColor;
+  }
+
+  colors.tickColor = isStringAndColorValue(propsColor.tickColor)
+    ? propsColor.tickColor
+    : '#FFFFFF';
+
+  return colors;
+}
+
+
+class Checkbox extends Component {
   static propTypes = {
     id: PropTypes.string,
     checked: PropTypes.bool,
@@ -18,6 +45,7 @@ class Checkbox extends Component {
     tickSize: PropTypes.oneOf([1, 2, 3]),
     borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
     className: PropTypes.string,
+    delay: PropTypes.number,
     onChange: PropTypes.func,
   }
 
@@ -29,66 +57,30 @@ class Checkbox extends Component {
     tickSize: 2,
     borderThickness: 3,
     className: '',
-    onChange: () => { },
+    delay: 0,
+    onChange: () => {},
   }
 
-  constructor(props) {
-    super(props);
 
-    const backgroundColor = isStringAndColorValue(props.color)
-      ? props.color
-      : isStringAndColorValue(props.color.backgroundColor)
-        ? props.color.backgroundColor
-        : Checkbox._defaultColor;
-    const borderColor = isStringAndColorValue(props.color)
-      ? props.color
-      : isStringAndColorValue(props.color.borderColor)
-        ? props.color.borderColor
-        : Checkbox._defaultColor;
-    const uncheckedBorderColor = isStringAndColorValue(props.color)
-      ? props.color
-      : isStringAndColorValue(props.color.uncheckedBorderColor)
-        ? props.color.uncheckedBorderColor
-        : Checkbox._defaultColor;
-    const tickColor = isStringAndColorValue(props.color.tickColor)
-      ? props.color.tickColor
-      : '#FFFFFF';
-
-    this.state = {
-      checked: props.checked,
-      colors: {
-        backgroundColor,
-        borderColor,
-        uncheckedBorderColor,
-        tickColor,
-      },
-    };
-
-    this.handleClickCheckbox = this.handleClickCheckbox.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.state.checked !== nextProps.checked) {
-      this.setState({ checked: nextProps.checked });
-    }
-  }
-
-  handleClickCheckbox() {
-    const newValue = !this.state.checked;
-
-    this.setState({ checked: newValue });
-    this.props.onChange(newValue);
+  handleClickCheckbox = () => {
+    this.props.onChange(!this.props.checked);
   }
 
 
   render() {
     const classes = ['Checkbox'];
     classes.push(this.props.className);
-    classes.push(this.state.checked ? 'checked' : 'unchecked');
+    classes.push(this.props.checked ? 'checked' : 'unchecked');
 
     const scale = 0.25 + (0.25 * this.props.size);
-
     const id = this.props.id !== '' ? { id: this.props.id } : {};
+    const colors = getColors(this.props.color);
+    const tickTransitionDelay = this.props.checked
+      ? 120 + this.props.delay
+      : this.props.delay;
+    const squareTransitionDelay = this.props.checked
+      ? this.props.delay
+      : 600 + this.props.delay;
 
     return (
       <div
@@ -117,17 +109,25 @@ class Checkbox extends Component {
             height="20"
             rx="2"
             ry="2"
-            fill={this.state.colors.backgroundColor}
-            stroke={this.state.checked ? this.state.colors.borderColor : this.state.colors.uncheckedBorderColor}
+            fill={colors.backgroundColor}
+            stroke={this.props.checked
+              ? colors.borderColor
+              : colors.uncheckedBorderColor}
             strokeWidth={`${this.props.borderThickness}px`}
+            style={{
+              transitionDelay: `${squareTransitionDelay}ms`,
+            }}
           />
           <path
             className="tick"
             d="M6,6 v8 h16"
             strokeWidth={this.props.tickSize}
-            stroke={this.state.colors.tickColor}
+            stroke={colors.tickColor}
             fill="none"
             transform="rotate(-45, 12, 12)"
+            style={{
+              transitionDelay: `${tickTransitionDelay}ms`,
+            }}
           />
         </svg>
       </div>

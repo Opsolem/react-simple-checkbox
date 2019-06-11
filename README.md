@@ -69,6 +69,12 @@ import Checkbox from 'react-simple-checkbox';
           <td>additional class name of root node</td>
         </tr>
         <tr>
+          <td>delay</td>
+          <td>number</td>
+          <td>0</td>
+          <td>delay (in ms) before the animation</td>
+        </tr>
+        <tr>
           <td>checked</td>
           <td>boolean</td>
           <td>false</td>
