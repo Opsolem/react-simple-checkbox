@@ -75,6 +75,18 @@ import Checkbox from 'react-simple-checkbox';
           <td>delay (in ms) before the animation</td>
         </tr>
         <tr>
+          <td>backAnimationDuration</td>
+          <td>number</td>
+          <td>180</td>
+          <td>duration (in ms) of the checkbox's background transition</td>
+        </tr>
+        <tr>
+          <td>tickAnimationDuration</td>
+          <td>number</td>
+          <td>500</td>
+          <td>duration (in ms) of the checkbox's tick transition</td>
+        </tr>
+        <tr>
           <td>checked</td>
           <td>boolean</td>
           <td>false</td>
