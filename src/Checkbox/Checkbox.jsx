@@ -37,6 +37,7 @@ function getColors(propsColor) {
 
 
 const Checkbox = ({
+  backAnimationDuration,
   borderThickness,
   checked,
   className,
@@ -45,6 +46,7 @@ const Checkbox = ({
   id,
   onChange,
   size,
+  tickAnimationDuration,
   tickSize,
 }) => {
   const classes = ['Checkbox'];
@@ -95,6 +97,7 @@ const Checkbox = ({
           strokeWidth={`${borderThickness}px`}
           style={{
             transitionDelay: `${squareTransitionDelay}ms`,
+            transitionDuration: `${backAnimationDuration}ms`,
           }}
         />
         <path
@@ -106,35 +109,40 @@ const Checkbox = ({
           transform="rotate(-45, 12, 12)"
           style={{
             transitionDelay: `${tickTransitionDelay}ms`,
+            transitionDuration: `${tickAnimationDuration}ms`,
           }}
         />
       </svg>
     </div>
   );
-}
+};
 
 Checkbox.propTypes = {
-  id: PropTypes.string,
-  checked: PropTypes.bool,
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  size: PropTypes.oneOf([1, 2, 3]),
-  tickSize: PropTypes.oneOf([1, 2, 3]),
+  backAnimationDuration: PropTypes.number,
   borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
+  checked: PropTypes.bool,
   className: PropTypes.string,
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   delay: PropTypes.number,
+  id: PropTypes.string,
   onChange: PropTypes.func,
+  size: PropTypes.oneOf([1, 2, 3]),
+  tickAnimationDuration: PropTypes.number,
+  tickSize: PropTypes.oneOf([1, 2, 3]),
 };
 
 Checkbox.defaultProps = {
-  id: '',
-  checked: false,
-  color: {},
-  size: 1,
-  tickSize: 2,
+  backAnimationDuration: 180,
   borderThickness: 3,
+  checked: false,
   className: '',
+  color: {},
   delay: 0,
+  id: '',
   onChange: () => {},
+  size: 1,
+  tickAnimationDuration: 500,
+  tickSize: 2,
 };
 
 

@@ -11,6 +11,8 @@
     stroke-dasharray: 24;
     stroke-dashoffset: 24;
     transition: stroke-dashoffset .5s cubic-bezier(1,0,.55,.41);
+    transition-property: stroke-dashoffset;
+    transition-timing-function: cubic-bezier(1,0,.55,.41);
   }
 
   .square {
