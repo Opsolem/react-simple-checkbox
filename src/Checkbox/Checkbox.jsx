@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 require('./Checkbox.scss');
@@ -36,104 +36,106 @@ function getColors(propsColor) {
 }
 
 
-class Checkbox extends Component {
-  static propTypes = {
-    id: PropTypes.string,
-    checked: PropTypes.bool,
-    color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    size: PropTypes.oneOf([1, 2, 3]),
-    tickSize: PropTypes.oneOf([1, 2, 3]),
-    borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
-    className: PropTypes.string,
-    delay: PropTypes.number,
-    onChange: PropTypes.func,
-  }
+const Checkbox = ({
+  borderThickness,
+  checked,
+  className,
+  color,
+  delay,
+  id,
+  onChange,
+  size,
+  tickSize,
+}) => {
+  const classes = ['Checkbox'];
+  classes.push(className);
+  classes.push(checked ? 'checked' : 'unchecked');
 
-  static defaultProps = {
-    id: '',
-    checked: false,
-    color: {},
-    size: 1,
-    tickSize: 2,
-    borderThickness: 3,
-    className: '',
-    delay: 0,
-    onChange: () => {},
-  }
+  const scale = 0.25 + (0.25 * size);
+  const attrId = id !== '' ? { id } : {};
+  const colors = getColors(color);
+  const tickTransitionDelay = checked
+    ? 120 + delay
+    : delay;
+  const squareTransitionDelay = checked
+    ? delay
+    : 600 + delay;
 
-
-  handleClickCheckbox = () => {
-    this.props.onChange(!this.props.checked);
-  }
-
-
-  render() {
-    const classes = ['Checkbox'];
-    classes.push(this.props.className);
-    classes.push(this.props.checked ? 'checked' : 'unchecked');
-
-    const scale = 0.25 + (0.25 * this.props.size);
-    const id = this.props.id !== '' ? { id: this.props.id } : {};
-    const colors = getColors(this.props.color);
-    const tickTransitionDelay = this.props.checked
-      ? 120 + this.props.delay
-      : this.props.delay;
-    const squareTransitionDelay = this.props.checked
-      ? this.props.delay
-      : 600 + this.props.delay;
-
-    return (
-      <div
-        className={classes.join(' ')}
-        role="checkbox"
-        aria-checked="false"
-        tabIndex="0"
-        onClick={this.handleClickCheckbox}
-        onKeyPress={this.handleClickCheckbox}
+  return (
+    <div
+      className={classes.join(' ')}
+      role="checkbox"
+      aria-checked="false"
+      tabIndex="0"
+      onClick={() => { onChange(!checked); }}
+      onKeyPress={() => { onChange(!checked); }}
+    >
+      <input {...attrId} type="checkbox" style={{ display: 'none' }} />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        width="24px"
+        height="24px"
+        viewBox="0 0 24 24"
+        transform={`scale(${scale})`}
       >
-        <input {...id} type="checkbox" style={{ display: 'none' }} />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          version="1.1"
-          width="24px"
-          height="24px"
-          viewBox="0 0 24 24"
-          transform={`scale(${scale})`}
-        >
-          <rect
-            className="square"
-            x="2"
-            y="2"
-            width="20"
-            height="20"
-            rx="2"
-            ry="2"
-            fill={colors.backgroundColor}
-            stroke={this.props.checked
-              ? colors.borderColor
-              : colors.uncheckedBorderColor}
-            strokeWidth={`${this.props.borderThickness}px`}
-            style={{
-              transitionDelay: `${squareTransitionDelay}ms`,
-            }}
-          />
-          <path
-            className="tick"
-            d="M6,6 v8 h16"
-            strokeWidth={this.props.tickSize}
-            stroke={colors.tickColor}
-            fill="none"
-            transform="rotate(-45, 12, 12)"
-            style={{
-              transitionDelay: `${tickTransitionDelay}ms`,
-            }}
-          />
-        </svg>
-      </div>
-    );
-  }
+        <rect
+          className="square"
+          x="2"
+          y="2"
+          width="20"
+          height="20"
+          rx="2"
+          ry="2"
+          fill={colors.backgroundColor}
+          stroke={checked
+            ? colors.borderColor
+            : colors.uncheckedBorderColor}
+          strokeWidth={`${borderThickness}px`}
+          style={{
+            transitionDelay: `${squareTransitionDelay}ms`,
+          }}
+        />
+        <path
+          className="tick"
+          d="M6,6 v8 h16"
+          strokeWidth={tickSize}
+          stroke={colors.tickColor}
+          fill="none"
+          transform="rotate(-45, 12, 12)"
+          style={{
+            transitionDelay: `${tickTransitionDelay}ms`,
+          }}
+        />
+      </svg>
+    </div>
+  );
 }
+
+Checkbox.propTypes = {
+  id: PropTypes.string,
+  checked: PropTypes.bool,
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  size: PropTypes.oneOf([1, 2, 3]),
+  tickSize: PropTypes.oneOf([1, 2, 3]),
+  borderThickness: PropTypes.oneOf([1, 2, 3, 4]),
+  className: PropTypes.string,
+  delay: PropTypes.number,
+  onChange: PropTypes.func,
+};
+
+Checkbox.defaultProps = {
+  id: '',
+  checked: false,
+  color: {},
+  size: 1,
+  tickSize: 2,
+  borderThickness: 3,
+  className: '',
+  delay: 0,
+  onChange: () => {},
+};
 
 
 export default Checkbox;
