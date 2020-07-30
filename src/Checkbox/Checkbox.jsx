@@ -35,8 +35,7 @@ function getColors(propsColor) {
   return colors;
 }
 
-
-const Checkbox = ({
+const Checkbox = React.forwardRef(({
   backAnimationDuration,
   borderThickness,
   checked,
@@ -48,7 +47,7 @@ const Checkbox = ({
   size,
   tickAnimationDuration,
   tickSize,
-}) => {
+}, ref) => {
   const classes = ['Checkbox'];
   classes.push(className);
   classes.push(checked ? 'checked' : 'unchecked');
@@ -65,6 +64,7 @@ const Checkbox = ({
 
   return (
     <div
+      ref={ref}
       className={classes.join(' ')}
       role="checkbox"
       aria-checked="false"
@@ -115,7 +115,7 @@ const Checkbox = ({
       </svg>
     </div>
   );
-};
+});
 
 Checkbox.propTypes = {
   backAnimationDuration: PropTypes.number,
